@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  db_backend_vant:
+    container_name: db_backend_vant
+    image: mongo:5.0.3
+    restart: always
+    env_file: .env
+    ports:
+      - 27017:27017
+  backend_vant:
+    build: .
+    container_name: backend_vant
+    ports:
+      - 8000:3000
+    env_file: .env
+    volumes:
+      - ./:/code
+    depends_on:
+      - db_backend_vant
+
