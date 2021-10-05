@@ -8,10 +8,10 @@ import { ConfigModule } from '@nestjs/config';
 @Module({
   imports: [
     ConfigModule.forRoot({ envFilePath: '.env' }),
-    VantModule,
     MongooseModule.forRoot(
       `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@db_backend_vant:${process.env.DB_PORT}/${process.env.DB_NAME}`,
     ),
+    VantModule,
   ],
   controllers: [AppController],
   providers: [AppService],

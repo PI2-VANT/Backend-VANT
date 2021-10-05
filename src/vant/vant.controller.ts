@@ -1,7 +1,15 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Delete,
+  Put,
+} from '@nestjs/common';
 import { VantService } from './vant.service';
 import { CreateVantDto } from './dto/create-vant.dto';
-import { UpdateVantDto } from './dto/update-vant.dto';
+// import { UpdateVantDto } from './dto/update-vant.dto';
 
 @Controller('vant')
 export class VantController {
@@ -12,23 +20,18 @@ export class VantController {
     return this.vantService.create(createVantDto);
   }
 
-  @Get()
+  @Get('/all')
   findAll() {
     return this.vantService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.vantService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateVantDto: UpdateVantDto) {
-    return this.vantService.update(+id, updateVantDto);
+  finOne(@Param('id') id: string) {
+    return this.vantService.findOne(id);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.vantService.remove(+id);
+  deleteOne(@Param('id') id: string) {
+    return this.vantService.deleteOne(id);
   }
 }
