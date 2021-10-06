@@ -1,0 +1,36 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    types: [opened, synchronize, reopened]
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build db and api containers
+      run: docker-compose up -d --build db_backend_vant backend_vant
+      
+    - name: Run tests
+      run:  docker-compose run backend_vant npm run test
+      
+    - name: Run stylesheet analysis
+      run: docker-compose run backend_vant yarn lint
+      
+  deploy_dev:
+    if: github.ref == 'refs/heads/dev'
+    needs: build_and_test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+  deploy_main:
+    if: github.ref == 'refs/heads/main'
+    needs: build_and_test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
