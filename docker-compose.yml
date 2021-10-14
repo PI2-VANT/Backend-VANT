@@ -10,15 +10,16 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: password
       MONGO_INITDB_DATABASE: db_backend_vant
     env_file: .env
+    command: mongod --port ${DB_PORT}
     ports:
-      - 27017:27017
+      - ${DB_PORT}:${DB_PORT}
     volumes:
       - ./mongo.sh:/docker-entrypoint-initdb.d/mongo-init.sh:ro
   backend_vant:
     build: .
     container_name: backend_vant
     ports:
-      - 8081:3000
+      - ${APPLICATION_PORT}:3000
     env_file: .env
     volumes:
       - ./:/code
