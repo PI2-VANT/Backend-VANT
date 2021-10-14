@@ -18,7 +18,7 @@ services:
     build: .
     container_name: backend_vant
     ports:
-      - 8000:3000
+      - 8081:3000
     env_file: .env
     volumes:
       - ./:/code
