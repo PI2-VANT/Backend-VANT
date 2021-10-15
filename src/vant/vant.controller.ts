@@ -20,7 +20,7 @@ export class VantController {
     return this.vantService.create(createVantDto);
   }
 
-  @Get('/all')
+  @Get()
   findAll() {
     return this.vantService.findAll();
   }
