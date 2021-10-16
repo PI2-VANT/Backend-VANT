@@ -1,4 +1,4 @@
-version: '3.3'
+version: '3.5'
 
 services:
   db_backend_vant:
@@ -13,17 +13,24 @@ services:
     command: mongod --port ${DB_PORT}
     ports:
       - ${DB_PORT}:${DB_PORT}
+    networks:
+      - vant-network
     volumes:
       - ./mongo.sh:/docker-entrypoint-initdb.d/mongo-init.sh:ro
   backend_vant:
     build: .
     container_name: backend_vant
     ports:
-      - ${APPLICATION_PORT}:3000
+      - ${APPLICATION_PORT}:${APPLICATION_PORT}
     env_file: .env
+    networks:
+      - vant-network
     volumes:
       - ./:/code
     depends_on:
       - db_backend_vant
-
+networks:
+  vant-network:
+    name: vant-network
+    driver: bridge
 
