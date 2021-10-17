@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.5'
 
 services:
   db_backend_vant:
@@ -10,19 +10,27 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: password
       MONGO_INITDB_DATABASE: db_backend_vant
     env_file: .env
+    command: mongod --port ${DB_PORT}
     ports:
-      - 27017:27017
+      - ${DB_PORT}:${DB_PORT}
+    networks:
+      - vant-network
     volumes:
       - ./mongo.sh:/docker-entrypoint-initdb.d/mongo-init.sh:ro
   backend_vant:
     build: .
     container_name: backend_vant
     ports:
-      - 8000:3000
+      - ${APPLICATION_PORT}:${APPLICATION_PORT}
     env_file: .env
+    networks:
+      - vant-network
     volumes:
       - ./:/code
     depends_on:
       - db_backend_vant
-
+networks:
+  vant-network:
+    name: vant-network
+    driver: bridge
 
