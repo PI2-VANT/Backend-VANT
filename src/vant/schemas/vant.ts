@@ -5,14 +5,14 @@ export type VantDocument = Vant & Document;
 
 @Schema()
 export class Vant {
-  @Prop()
+  @Prop({ required: true, unique: true })
   registrationCode: string;
 
-  @Prop()
+  @Prop({ required: true })
   name: string;
 
-  @Prop([String])
-  flights: string[];
+  @Prop({ required: true })
+  userId: string;
 }
 
 export const VantSchema = SchemaFactory.createForClass(Vant);
