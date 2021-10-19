@@ -20,6 +20,11 @@ export class VantController {
     private readonly flyService: FlyService,
   ) {}
 
+  @Get('my-vants/:id')
+  async getMyVants(@Param('id') userId: string) {
+    return await this.vantService.getMyVants(userId);
+  }
+
   @Post()
   create(@Body() createVantDto: CreateVantDto) {
     return this.vantService.create(createVantDto);

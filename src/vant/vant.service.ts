@@ -13,6 +13,10 @@ export class VantService {
     return createdVant.save();
   }
 
+  async getMyVants(userId: string): Promise<Vant[]> {
+    return await this.vantModel.find({ userId });
+  }
+
   async checkIfExist(registrationCode: string): Promise<boolean> {
     const vant = await this.vantModel.find({ registrationCode });
     if (vant) {
