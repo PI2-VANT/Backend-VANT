@@ -40,6 +40,7 @@ export class VantController {
     @Param(':id') vantId: string,
     @Body() createFlyDto: CreateFlyDto,
   ) {
+    console.log(createFlyDto);
     const vant = await this.vantService.checkIfExist(vantId);
     if (vant) {
       return this.flyService.create(createFlyDto);

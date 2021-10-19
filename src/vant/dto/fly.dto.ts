@@ -11,9 +11,9 @@ export class CreateFlyDto {
 
   umidade: number;
 
-  latitude: number;
+  latitude: string;
 
-  longitude: number;
+  longitude: string;
 
   date: Date;
 

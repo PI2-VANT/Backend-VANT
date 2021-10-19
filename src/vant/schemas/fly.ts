@@ -26,10 +26,10 @@ export class Fly {
   umidade: number;
 
   @Prop()
-  latitude: number;
+  latitude: string;
 
   @Prop()
-  longitude: number;
+  longitude: string;
 
   @Prop()
   date: Date;

@@ -14,7 +14,7 @@ export class VantService {
   }
 
   async checkIfExist(registrationCode: string): Promise<boolean> {
-    const vant = await this.vantModel.exists({ registrationCode });
+    const vant = await this.vantModel.find({ registrationCode });
     if (vant) {
       return true;
     }
