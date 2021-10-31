@@ -64,8 +64,8 @@ export class FlyService {
 
     return result;
   }
-  async findFlyData(flyCode: string): Promise<Fly[]> {
-    return await this.flyModel.find({ flyCode });
+  async findFlyData(flyCode: string, registrationCode: string): Promise<Fly[]> {
+    return await this.flyModel.find({ flyCode }).where({ registrationCode });
   }
 
   async deleteOne(id: string): Promise<any> {

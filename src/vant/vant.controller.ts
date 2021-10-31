@@ -40,9 +40,12 @@ export class VantController {
     return await this.flyService.getUserVantsFlysHistory(userId);
   }
 
-  @Get('get-fly-data/:id')
-  async getFlyData(@Param('id') flyCode: string) {
-    return await this.flyService.findFlyData(flyCode);
+  @Get('get-fly-details/:flyCode/drone/:registrationCode')
+  async getFlyData(
+    @Param('flyCode') flyCode: string,
+    @Param('registrationCode') registrationCode: string,
+  ) {
+    return await this.flyService.findFlyData(flyCode, registrationCode);
   }
 
   @Post('/fly-data/:id')
