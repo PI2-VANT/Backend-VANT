@@ -35,6 +35,11 @@ export class VantController {
     return await this.flyService.findFlyCodeHistory(flyCode);
   }
 
+  @Get('history/:id')
+  async getHistory(@Param('id') userId: string) {
+    return await this.flyService.getUserVantsFlysHistory(userId);
+  }
+
   @Get('get-fly-data/:id')
   async getFlyData(@Param('id') flyCode: string) {
     return await this.flyService.findFlyData(flyCode);

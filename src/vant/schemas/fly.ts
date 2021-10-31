@@ -36,6 +36,9 @@ export class Fly {
 
   @Prop()
   registrationCode: string;
+
+  @Prop({ default: false, required: false })
+  start: boolean;
 }
 
 export const FlySchema = SchemaFactory.createForClass(Fly);
